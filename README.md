@@ -1,18 +1,17 @@
 # MVC-frame
-Няколко думи за проекта: 
-    Това е framework който е създаден по подобие на ларавел 4 , целта му е личен проект за дистанционно управление на жилището ми . 
-    Функциите са му комуникация с втори сървър Raspberry Pi  (който комуникира с различните arduino-та и сензори в жилището). 
-    Освен това има за цел изпълението на различни функционалности за който е нужно използването на Web паяци като:
-    
-    
-    Youtube downloader - система която може да сваля песни от Youtube и да ги запазва в сървъра за локално изпълнение.
-        Тази система може да сваля песен от подаден и линк , да сваля цял плейлист , да търси песни по подадено и име на изпълнител или да проверява на определен период от време за нови песни по предварително зададени и страници.
-    
-    Cooking Helper-> Има за цел да помага в изобра на това какво да се готви . Скрипта получава зададена му съставка или вид ястоие проверява локална база данни за рецепри използвани в миналото който се визуализират първи , ако потребителя не намери желана от него алгоритъма му предоставя вече подготвен списък от рецепти по зададените вече параметри който е взаймстван от няколко кулинарни сайта. 
-    При избор на рецепта от външен източник тя се добавя в базата данни. 
-    
-    Wether and News algorytem - целта му е да предоставя на потребителя актуални прогноза за времето и актуални новини от избрани от него източници 
-    
+A few words about the project:
+This is the framework that was created in the likeness of laravel 4, its purpose is a personal project for the remote control of my apartment.
+The features are his communication with the second server Raspberry Pi (which communicates with various sensors and arduino in place).
+Moreover, the aims of the different functionalities for which need to use the Web Spiders, such as:
+
+
+Youtube downloader-system that can download songs from Youtube and saves them in local server implementation.
+This system can download song from submitted a link to download the whole playlist, to search for songs by artist name and submitted or to check for a certain period of time for new songs on preset and pages.
+
+Cooking-Helper > aims to help you find what to cook. The script gets the specified ingredient or his type of âstoie checks a local database for recepri used in the past that are displayed first, if the user does not find desired by him, provides him with a key already prepared a list of recipes under the specified parameters already which is borrowed from several culinary site.
+When choosing a recipe from an external source it is added to the database.
+
+Wether News and algorytem-its purpose is to provide the user up-to-date weather forecast and the latest news from selected sources thereof
     
 
 
@@ -30,51 +29,51 @@ PHP framework documentation:
     We have currently 5 request methods : GET, POST, DELETE, UPDATE and CONSOLE.
     first 4 is standart request from Rest API, the 5 method is use for execute a files on diferent languages by terminal execution .
      
-     Структурата на рутинга е както следва :
-     
-      $routes = array(
-        array("GET","home", "home@index"),
-      );
-        във функцията  all_routes  в файла routes.php 
-        има масив $routes които сдържа под масиви като всеки под масив е различна заявка . Структурата на тези под масиви е следната : 
-        първия елемент отговаря на типа заявка , втория отговаря на зададеното урл , а третия отговаря към кой контролер и коя фунцкия да         води (home- контролер index-функция във контролера).
-        при групирането на рутинги синтаксиса е следния : първия елемент показва че е група , втория линка който води към групата и третия          за роутингите който са във тази група.
-         
-         Като параметри в урлто има няколко правила за подаване на данни : 
-          {}- добавяне на 1 стойност ;
-          {}? - добавяне на 1 стойност, но стойността може и да липсва; 
-          {[]}- добавяне на няколко стойности (като лементи на масив )
-          в всеки израз се поставя опреденело име на променлива към която се предава стойността подадена чрез урл . Пример {id}?
-              TO DO : UPDATE and CONSOLE methods is currently on under construction 
+    The structure of rutinga is as follows:
 
+$routes = array(
+array("GET","home", "home@index"),
+);
+in the function all_routes in the file URroutes.php
+There is an array $routes which contains in each sub array as an array is different. Under the structure of these arrays is as follows:
+the first element corresponds to the type of request, the second corresponds to the specified URL, and the third corresponds to any controller and which leads to formulas (home-index-controller function in the controller).
+When the rutingi syntax is as follows: the first item shows that the group is the second link that leads to the group, and the third for routingite who are in this group.
+
+As parameters in the urlto there are a few rules for submitting data:
+{}-Add 1 value;
+{}? -Add 1 value, but the value might be missing;
+{[]}-add some values (such as elements of an array)
+in each place the expression opredenelo the name of a variable that is passed to the value given by the URL. Example {id}?
+TO DO : UPDATE and CONSOLE methods is currently on under construction
 –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-       Контролери и Модели : 
-          За да създадете контролер и модел се изпълнява в конзолата командата php terminal.php controller create името на контролера , 
-          това създава контролер и модел с даденото име и необходимите му наследявания и фунционалности.
-          Контролера наслядва класа BaseConroller който се грижи за извикването на модела който отговаря този клас , както и за        извикванията на различните виюта и подаването им на променливи . 
-          TO DO :  за в бъдеще трябва да се вкара възможност за извикване на други модели към дадения клас както и да се създаде конфигурационен файл за различни опции като например дебгинг мода да смарти , кеширанията в смарти и жизнения им цикъл 
-          
-          Извикването на определено вию от контролер става по следния начин : 
-          self::View('index', $view);
-           като index е файла който се извиква , а $view е масив с параметри които му се подават . Пример : $view = array('users'=> $users['query'],'pages'=>$users['pages']);
-         
-         извикването на функция от модела става с следния синтаксис : 
-          $this->db-> фукцията която ни е нужна ;
-          Пример: 
-         $user = $this->db->getUserInfo($_GET['id']);
-          
-          Модел: 
-          Модела основно наследява библиотеката за базите данни което позволява по лесното извикване и използване на различните функции от тази библиотека. 
-          TO DO: Да се вкара библиотека за работа и с MongoDB  както и да се конфигурира към моделите  
+      Controllers and models:
+To create the controller and the model is implemented in the console command php URterminal.php create controller name of the controller,
+This creates the controller and the model with the given name and the necessary nasledâvaniâ and its functionalities.
+The controller class inherits from BaseConroller which takes care of calling a model which complies with the class, as well as the various views and calls their submission of variables.
+TO DO: in the future you need to put the possibility of calling the other models to the given class as well as to create a configuration file for various options such as debging fashion to Smarty, Smarty and caching in the life cycle
+
+The call for a view of the controller:
+self::View('index', $view);
+as the index is a file that is called $view and is an array of parameters that are submitted. Example: $view = array (' users ' = $users > [' query '], ' pages ' = $users > [' pages ']);
+
+calling a function from the model's with the following syntax:
+$this-db-> > function you need;
+Example:
+$user = $this->db->getUserInfo($_GET['id']);
+
+Model:
+The model basically inherited the library of databases which allows for easy display and use of the various functions of this library.
+TO DO: score a library for working with MongoDB and configures to the models
 
 _______________________________________________________________________________________________________________________________________
 
 
-    Terminal.php
-      Terminal.php  има за цел да се изпълняват различни функционалности посредством терминал. Основните му две са създаването на   файлове за базите данни и тяхното изпление както и за изплниения и тестване на различни  скриптови алгоритми .
-  
-    Миграции : за по лесно създаване на таблици в Msql можете да съъздадете файл с пааметрите на таблицата която искате , както и да я променяте или истривате. Също така миграциите са удобен начин за трансфериране на таблици от един вид бази данни към друг.
-    Създаването на такъв файл става посредством командата : terminal.php mysql create login това ще създаде файл в папка migration сс следното съдържание : 
+   Terminal.php
+URTerminal.php is designed to perform various functions by means of the Terminal. The main two are the creation of files for the databases and their implementation as well as performances and testing of different scripting algorithms.
+
+Migrations: for the easy creation of tables in the Msql, you can create a file with the parameters of the table that you want, and you can modify or delete it. Migrations also are a convenient way of transferring tables from one database type to another.
+Creating such a file through command: create login mysql URterminal.php this will create a file in a folder migration with the following content:
+ 
     <?php
 			function tableConfig (){
 				$table = array(
@@ -110,26 +109,24 @@ ________________________________________________________________________________
 				);
 			return $table;
 			}
-      
-      това е примерно сдържание с цел да улесни използването на този подход в масива $table има няколко под масива dropTable engine encoding columns.  dropTable има за цел да изтрие ако има вече създадена таблица с това име,  engine е енджина с който ще работи таблицата ,  encoding е енкодинга който ще използва таблицата, в columns се съдържа по 1 под масив за всяка една нейна колона . Пример елемента от columns с ид username , това ид е името на колоната а в под масива username се съъдържат неговите специфики : 
-      	      'type' => типа на данни на колоната,
-							'size'=> допустимия размер за стойности в тази колона,
-							'autoIncrement' => 0 = да 1 = не,
-							'notNull'  => 0 = да 1 = не,
-							'primaryKey'  => 0 = да 1 = не,
-							'unsigned'  => 0 = да 1 = не
-              
-              ВАЖНО!!! не се позволява да има повече от 1 колона за която autoIncrement е равно на 1 ;
-              
-              TO DO:   terminal.php mysql update table
-              
-              terminal.php mysql migrate table : след като е създаден файла на миграцията с изпълението на тази команта се изпълнява SQL заявка която създава таблицата с дадените в файла параметри.
-              
-	            terminal.php mysql delete table : команда която изтрива дадената команда безвъзвратно ; 
-              ВАЖНО !!! командата изтрива директно заявката . TO DO:  добре е да се сложи допълнително питане за изпълнението на тази заявка 
-              
-              
-              
-               terminal.php script root.pl 1 www.google.bg : Тази команда извиква файла който и е подаден и му подава параметрите след името на файла . Пример за терминално извикване на същия файл perl root.pl 1 www.google.bg ,удобно е за тестване на различни скриптове . 
-               ВАЖНО !!! Към момента командата изплнява единствено Perl файлове който се намират в папка PerlScripts. Поради наличието на framework  който се грижи за изплнението на различни Perl скриптове . В бъъдеще тази команда подлежи на промяна с цел включване на подобен framework  и на Python нужен за директна комуникация с хардуерните елементи 
-	 
+      This is a sample content in order to facilitate the use of this approach in the array $table there are a few under the array encoding engine dropTable columns. dropTable is designed to delete if there is already a table created with this name, engine is engine that will work with the table, encoding is encoding which will use the table columns contain a 1 in the array for each column of hers. Example of element with ID columns username, this ID is the name of the column in the array are contained under the username its specifics:
+' type ' = > data type of the column
+' size ' = > size allowed for values in this column
+' autoIncrement ' = > 0 = No 1 = Yes,
+' notNull ' = > 0 = No 1 = Yes,
+' primaryKey ' = > 0 = No 1 = Yes,
+' unsigned ' = > 0 = No 1 = Yes
+
+IMPORTANT!!! It is not allowed to have more than 1 column for which the autoIncrement is equal to 1;
+
+TO DO: terminal.php mysql update table
+
+migrate mysql table URterminal.php: once created the file migration with implementation of this command is executed SQL query that creates the table in the file with the given parameters.
+
+mysql table URterminal.php delete: Deletes a command which the command permanently;
+IMPORTANT!!! the command deletes the query directly. TO DO: it is good to put an additional question on the implementation of this request
+
+
+
+URterminal.php root.pl www.google.bg script 1: this command invokes any file is submitted and pass the parameters after the name of the file. An example of a Terminal on the same perl function call file 1 root.pl www.google.bg, convenient for testing of different scripts.
+IMPORTANT!!! At the time the command executes only Perl files which are located in the folder PerlScripts. Due to the presence of a framework that takes care of the implementation of the various Perl scripts. In the future this command is subject to change so as to include a similar framework and Python need for direct communication with the hardware elements
